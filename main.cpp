@@ -14,16 +14,21 @@
 class Cplayer
 {
 private:
-    int number;//选手序号
-    int judge_n;//裁判人数
-    char*name;//选手姓名
-    double score[20];//选手的所有分数
+    
+    int number; //学生学号
+    int judge_n; //评委人数
+    char*name; //学生姓名
+    char stu_sex[20];//学生性别
+    int stu_dateofbirth;//学生生日
+    char stu_class[20];//学生班级
+    char stu_TelNO[20];//学生电话
+    double score[20]; //学生分数的集合
 public:
     Cplayer(char*a,int n1,int jn,double fen[20]) // 构造函数,对数据初始化
     {
         name=new char[strlen(a)+1];
         strcpy(name,a); //姓名赋值
-        number=n1; //序号
+        number=n1;//序号
         judge_n=jn; //裁判数
         int i=0;
         for(i=0;i<judge_n;i++)
@@ -60,16 +65,20 @@ public:
 class Cresult // 定义另一个类。
 {
 private:
-    int number; //选手序号
-    int judge_n; //裁判人数
-    char*name; //选手姓名
-    double score[20]; //选手分数的集合
+    int number; //学生学号
+    int judge_n; //评委人数
+    char*name; //学生姓名
+    char stu_sex[20];//学生性别
+    int stu_dateofbirth;//学生生日
+    char stu_class[20];//学生班级
+    char stu_TelNO[20];//学生电话
+    double score[20]; //学生分数的集合
 public:
     Cresult(char*a,int n1,int jn,double fen[20])
     {
         name=new char[strlen(a)+1];
         strcpy(name,a); //姓名赋值
-        number=n1;//选手序号
+        number=n1;//选手学号
         judge_n=jn;//裁判数
         int i=0;
         for(i=0;i<judge_n;i++)
@@ -170,12 +179,14 @@ double Cresult::get_lastscore()
 
 std::ofstream & operator<<(std::ofstream & base,Cplayer & a)//运算符重载
 {
-    base<<a.number<<"  "<<a.name<<"    ";
-    for(int i=0;i<a.judge_n;i++)
-        base<<"  "<<a.score[i];
+    base<<a.number<<"  "<<a.name<<"    "<<a.stu_sex<<a.stu_dateofbirth<<a.stu_class<<a.stu_TelNO<<a.judge_n;
+      for(int i=0;i<a.judge_n;i++)
+    base<<"  "<<a.score[i];
     base<<std::endl;
     return base;
 }//向指定文件输入选手的资料
+
+
 
 
 std::ofstream & operator <<(std::ofstream & score,Cresult & a) //文件操作,结果的输入
@@ -189,94 +200,96 @@ int  main()
 {
     
     
-    
-    int ch;
-    int len;
-   // int i=0;
-    FILE* fstream;
-    /*使用“w+”打开可读/写文件，若文件存在则文件长度清为零，
-     即该文件内容会消失。若文件不存在则建立该文件*/
-    fstream=fopen("/Users/s20171105137/Desktop/student3.csv","w+");
-    if(fstream==NULL)
-    {
-        printf("read file test.txt failed!\n");
-        exit(1);
-    }
-    
-    
-    
-    /*使用getc函数从文件流中读取字符*/
-    while( (ch = getc(fstream))!=EOF)
-    {
-        putchar(ch);
-    }
-    putchar('\n');
-    len =0;
-    putw(len,fstream);
-    if(ferror(fstream))
-    {
-        printf("Error writing to file.\n");
-    }
-    else
-    {
-        printf("Success writing to file.\n");
-    }
-    fclose(fstream);
-    
-    fstream = fopen("/Users/s20171105137/Desktop/student1.csv","r");  /*打开文件*/
-    if(fstream == NULL)
-    {
-        printf("Error opening file test.txt\n");
-        exit(1);
-    }
-    len = 0;
-    
-    len = getw(fstream);/*读取整数*/
-    printf("Read int is:%d\n",len);
-    fclose(fstream);
-    return 0;
-}
-    
 //    
-//    double p1[20]={8.8,9.3,7.9,8.7,8.9,9.7,9.2};//选手1得分
-//    double p2[20]={8.9,8.2,8.6,8.8,8.5,9.1,9.3};//选手2得分
-//    double p3[20]={8.9,8.4,8.7,8.6,8.6,8.4,8.6};//选手3得分
+//    int ch;
+//    int len;
+//   // int i=0;
+//    FILE* fstream;
+//    /*使用“w+”打开可读/写文件，若文件存在则文件长度清为零，
+//     即该文件内容会消失。若文件不存在则建立该文件*/
 //    
-//    
-//    double p4[20]={7.9,8.3,8.5,8.6,8.5,8.9,8.3};//选手4得分
-//    double p5[20]={9.5,9.1,9.8,9.2,9.0,9.5,8.9};//选手5得分
 //    std::ofstream outfile1;
-//    outfile1.open("/Users/s20171105137/Desktop/student1.csv",std::ios::out);//保存到D盘
-//    std::ofstream outfile2;
-//    outfile2.open("/Users/s20171105137/Desktop/student1.csv",std::ios::out);//保存到D盘
-////    Cplayer player1("zhangjin",1,7,p1);//调用构造函数
-////    Cplayer player2("lintao",2,7,p2);//调用构造函数
-////    Cplayer player3("guojian",3,7,p3);//调用构造函数
-////    Cplayer player4("maling",4,7,p4);//调用构造函数
-////    Cplayer player5("liuyifan",5,7,p5);//调用构造函数
+//    outfile1.open("/Users/s20171105137/Desktop/student1.csv",std::ios::out);
 //    
-////    player1.show_score();//显示选手1信息
-////    player2.show_score();//显示选手2信息
-////    player3.show_score();//显示选手3信息
-////    player4.show_score();//显示选手4信息
-////    player5.show_score();//显示选手5信息
-
-//    outfile2<<""<<std::endl;//向文件输出
-//    outfile2<< "<<std::endl;//向文件输出
-//    outfile2<<""<<std::endl;//向文件输出
-////    outfile1<<player1<<player2<<player3<<player4<<player5;//向文件1输出5个选手的信息
+//    fstream=fopen("/Users/s20171105137/Desktop/student3.csv","w+");
+//    if(fstream==NULL)
+//    {
+//        printf("read file test.txt failed!\n");
+//        exit(1);
+//    }
 //    
-//    Cresult result1("zhangjin",1,7,p1);//调用构造函数
-//    Cresult result2("lintao",2,7,p2);//调用构造函数
-//    Cresult result3("guojian",3,7,p3);//调用构造函数
-//    Cresult result4("maling",4,7,p4);//调用构造函数
-//    Cresult result5("liuyifan",5,7,p5);//调用构造函数
-//    result1.show_result();//显示选手1结果
-//    result2.show_result();//显示选手2结果
-//    result3.show_result();//显示选手3结果
-//    result4.show_result();//显示选手4结果
-//    result5.show_result();//显示选手5结果
-//    outfile2<<result1<<result2<<result3<<result4<<result5;//向文件2输出结果
-//    outfile1.close();//关闭文件
-//    outfile2.close();//关闭文件
+//    
+//    
+//    /*使用getc函数从文件流中读取字符*/
+//    while( (ch = getc(fstream))!=EOF)
+//    {
+//        putchar(ch);
+//    }
+//    putchar('\n');
+//    len =0;
+//    putw(len,fstream);
+//    if(ferror(fstream))
+//    {
+//        printf("Error writing to file.\n");
+//    }
+//    else
+//    {
+//        printf("Success writing to file.\n");
+//    }
+//    fclose(fstream);
+//    
+//    fstream = fopen("/Users/s20171105137/Desktop/student1.csv","r");  /*打开文件*/
+//    if(fstream == NULL)
+//    {
+//        printf("Error opening file test.txt\n");
+//        exit(1);
+//    }
+//    len = 0;
+//    
+//    len = getw(fstream);/*读取整数*/
+//    printf("Read int is:%d\n",len);
+//    fclose(fstream);
+//    return 0;
 //}
+    
+    
+    double p1[20]={88,93,79,87,89,97,92,97,98,94};//选手1得分
+    double p2[20]={88,93,79,87,89,97,92,97,98,34};//选手2得分
+    double p3[20]={88,93,79,87,89,97,92,97,97,84};//选手3得分
+    double p4[20]={88,93,79,87,39,97,92,97,48,94};//选手4得分
+    double p5[20]={88,93,79,87,79,97,92,97,98,64};//选手5得分
+    std::ofstream outfile1;
+    outfile1.open("/Users/s20171105137/Desktop/student1.csv",std::ios::out);//保存到D盘
+    std::ofstream outfile2;
+    outfile2.open("/Users/s20171105137/Desktop/student3.csv",std::ios::out);//保存到D盘
+    Cplayer player1("zhangjin",1,7,p1);//调用构造函数
+    Cplayer player2("lintao",2,7,p2);//调用构造函数
+    Cplayer player3("guojian",3,7,p3);//调用构造函数
+    Cplayer player4("maling",4,7,p4);//调用构造函数
+    Cplayer player5("liuyifan",5,7,p5);//调用构造函数
+    
+    player1.show_score();//显示选手1信息
+    player2.show_score();//显示选手2信息
+    player3.show_score();//显示选手3信息
+    player4.show_score();//显示选手4信息
+    player5.show_score();//显示选手5信息
+
+//    outfile2<<<<std::endl;//向文件输出
+//    outfile2<<""<<std::endl;//向文件输出
+//    outfile2<<""<<std::endl;//向文件输出
+//
+    Cresult result1("zhangjin",1,7,p1);//调用构造函数
+    Cresult result2("lintao",2,7,p2);//调用构造函数
+    Cresult result3("guojian",3,7,p3);//调用构造函数
+    Cresult result4("maling",4,7,p4);//调用构造函数
+    Cresult result5("liuyifan",5,7,p5);//调用构造函数
+    result1.show_result();//显示选手1结果
+    result2.show_result();//显示选手2结果
+    result3.show_result();//显示选手3结果
+    result4.show_result();//显示选手4结果
+    result5.show_result();//显示选手5结果
+    outfile1<<player1<<player2<<player3<<player4<<player5;//向文件1输出5个选手的信息
+    outfile2<<result1<<result2<<result3<<result4<<result5;//向文件2输出结果
+    outfile1.close();//关闭文件
+    outfile2.close();//关闭文件
+}
