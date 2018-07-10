@@ -123,9 +123,9 @@ public:
     double get_tscore()//选手的累积分数
     {
         double tscore;
-        if(judge_n<9)
+        if(judge_n<11)
             tscore=get_lastscore()*(judge_n-2);
-        if(judge_n>=9)
+        if(judge_n>=11)
             tscore=get_lastscore()*(judge_n-4);
         return tscore;
     }
@@ -143,10 +143,10 @@ double Cresult::get_lastscore()
 {
     double lastscore;
     int a,b;
-    if(judge_n<9)//裁判小于9时
+    if(judge_n<11)//裁判小于9时
         lastscore=(get_totalscore()-max_score()-min_score())/(judge_n-2);
     //最后得分为总分等于除去最高和最低的平均分
-    if(judge_n>=9)//裁判大于9时
+    if(judge_n>=11)//裁判大于9时
     {
         double min_score2,max_score2;
         int i=0;
@@ -262,12 +262,11 @@ int  main()
     outfile1.open("/Users/s20171105137/Desktop/student1.csv",std::ios::out);//保存到D盘
     std::ofstream outfile2;
     outfile2.open("/Users/s20171105137/Desktop/student3.csv",std::ios::out);//保存到D盘
-    Cplayer player1("zhangjin",1,7,p1);//调用构造函数
+    Cplayer player1("edd",1,7,p1);//调用构造函数
     Cplayer player2("lintao",2,7,p2);//调用构造函数
     Cplayer player3("guojian",3,7,p3);//调用构造函数
     Cplayer player4("maling",4,7,p4);//调用构造函数
     Cplayer player5("liuyifan",5,7,p5);//调用构造函数
-    
     player1.show_score();//显示选手1信息
     player2.show_score();//显示选手2信息
     player3.show_score();//显示选手3信息
@@ -278,7 +277,7 @@ int  main()
 //    outfile2<<""<<std::endl;//向文件输出
 //    outfile2<<""<<std::endl;//向文件输出
 //
-    Cresult result1("zhangjin",1,7,p1);//调用构造函数
+    Cresult result1("zfsfd",1,7,p1);//调用构造函数
     Cresult result2("lintao",2,7,p2);//调用构造函数
     Cresult result3("guojian",3,7,p3);//调用构造函数
     Cresult result4("maling",4,7,p4);//调用构造函数
